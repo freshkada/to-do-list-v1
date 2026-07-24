@@ -78,6 +78,15 @@
         #submit-button {
 
         }
+
+        .single-task {
+            background-color: white;
+            color: black;
+            width: fit-content;
+            height: fit-content;
+            padding: 2rem;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -121,37 +130,71 @@
     <script>
         const display = document.querySelector("#display");
         const addBtn = document.querySelector("#add-task-btn");
+        const form = document.querySelector("form");
 
         const dialogWindow = document.querySelector("dialog");
         const closeDialogBtn = document.querySelector("#close-dialog-btn")
         const submitBtn = document.querySelector("#submit-button");
 
         let tasks = [];
-        const title = document.querySelector("#title").value;
-        const description = document.querySelector("#title").value;
-        const dueDate = document.querySelector("#title").value;
-        const priority = document.querySelector("#title").value;
+
+        function renderTasks() {
+
+            display.innerHTML = "";
+
+            tasks.forEach(task => {
+                const singleTask = document.createElement("div");
+                singleTask.className = "single-task";
+
+                singleTask.innerHTML = `
+                    <h3>${task.title}</h3>
+                    <p>${task.description}</p>
+                    <p>due to: ${task.date}</p>
+                    <p>priority: ${task.priority}</p>
+                `;
+
+                display.appendChild(singleTask);
+            });
+
+            
+        }
 
         function Task(title, description, date, priority) {
-        this.title = title;
-        this.description = description;
-        this.date = date;
-        this.priority = priority;
-        this.completed = false;
+            this.title = title;
+            this.description = description;
+            this.date = date;
+            this.priority = priority;
+            this.completed = false;
+        };
+
+        function addTask(title, description, date, priority) {
+            const task = new Task(title, description, date, priority);
+            tasks.push(task);
+        };
 
         addBtn.addEventListener("click", () => {
             dialogWindow.showModal();
-        })
+        });
 
         closeDialogBtn.addEventListener("click", () => {
             dialogWindow.close();
-        })
+        });
 
         submitBtn.addEventListener("click", (event) => {
-            
-}
-
             event.preventDefault();
+
+            const title = document.querySelector("#title").value;
+            const description = document.querySelector("#description").value;
+            const date = document.querySelector("#date").value;
+            const priority = document.querySelector("#priority").value;
+
+            addTask(title, description, date, priority);
+
+            dialogWindow.close();
+
+            form.reset();
+
+            renderTasks();
         })
     </script>
 </body>
