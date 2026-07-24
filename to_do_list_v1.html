@@ -42,9 +42,10 @@
             color: white;
 
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
+            align-content: flex-start;
+            gap: 1.5rem;
 
             border-radius: 50px;
         }
@@ -82,10 +83,13 @@
         .single-task {
             background-color: white;
             color: black;
+
             width: fit-content;
             height: fit-content;
-            padding: 2rem;
+
+            padding: 1.2rem;
             font-size: 18px;
+            border-radius: 20px;
         }
     </style>
 </head>
