@@ -117,6 +117,27 @@
             padding: 1.2rem;
             font-size: 18px;
             border-radius: 20px;
+
+            position: relative;
+        }
+
+        .remove-task {
+            background-color: red;
+            color: red;
+            font-size: 14px;
+            
+            width: fit-content;
+            height: fit-content;
+
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem;
+            
+            border-radius: 100%;
+            padding: 0.1rem 0.5rem;
+        }
+        .remove-task:hover {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -180,12 +201,19 @@
                 singleTask.className = "single-task";
 
                 singleTask.innerHTML = `
-                    <div class="remove-task"></div>
+                    <div class="remove-task">x</div>
                     <h3>${task.title}</h3>
                     <p>${task.description}</p>
                     <p>due to: ${task.date}</p>
                     <p>priority: ${task.priority}</p>
                 `;
+
+                const removeTaskBtn = document.querySelector(".remove-task");
+
+                /*removeTaskBtn.addEventListener("click", () => {
+                    singleTask.remove();
+                });*/
+                //needs still eliminating from the tasks array apart from visually removing, now for some reason it's not working
 
                 display.appendChild(singleTask);
             });
@@ -214,6 +242,10 @@
             dialogWindow.close();
         });
 
+        removeTaskBtn.addEventListener("click", () => {
+            
+        });
+
         submitBtn.addEventListener("click", (event) => {
             event.preventDefault();
 
@@ -230,6 +262,8 @@
 
             renderTasks();
         })
+
+        
     </script>
 </body>
 </html>
